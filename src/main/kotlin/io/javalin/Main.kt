@@ -9,7 +9,7 @@ fun main(args: Array<String>) {
     var todos = arrayOf(Todo(123123123, "My very first todo", false))
 
     val app = Javalin.create()
-            .port(7000)
+            .port(getHerokuAssignedPort())
             .enableStaticFiles("/public")
 
     app.routes {
@@ -22,4 +22,12 @@ fun main(args: Array<String>) {
         }
     }
 
+}
+
+private fun getHerokuAssignedPort(): Int {
+    val processBuilder = ProcessBuilder()
+    if (processBuilder.environment().get("PORT") != null) {
+        return Integer.parseInt(processBuilder.environment().get("PORT"))
+    }
+    return 7000
 }
