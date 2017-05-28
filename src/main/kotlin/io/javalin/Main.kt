@@ -1,8 +1,7 @@
 package io.javalin
 
-import javalin.ApiBuilder.get
-import javalin.ApiBuilder.put
-import javalin.Javalin
+import io.javalin.ApiBuilder.get
+import io.javalin.ApiBuilder.put
 
 fun main(args: Array<String>) {
 
