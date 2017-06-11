@@ -12,12 +12,12 @@ fun main(args: Array<String>) {
             .enableStaticFiles("/public")
 
     app.routes {
-        get("/todos") { req, res ->
-            res.json(todos)
+        get("/todos") { ctx ->
+            ctx.json(todos)
         }
-        put("/todos") { req, res ->
-            todos = req.bodyAsClass(Array<Todo>::class.java)
-            res.status(204)
+        put("/todos") { ctx ->
+            todos = ctx.bodyAsClass(Array<Todo>::class.java)
+            ctx.status(204)
         }
     }
 
