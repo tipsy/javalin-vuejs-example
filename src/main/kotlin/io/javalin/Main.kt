@@ -10,6 +10,7 @@ fun main(args: Array<String>) {
     val app = Javalin.create()
             .port(getHerokuAssignedPort())
             .enableStaticFiles("/public")
+            .start()
 
     app.routes {
         get("/todos") { ctx ->
