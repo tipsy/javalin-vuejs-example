@@ -1,7 +1,6 @@
 package io.javalin
 
-import io.javalin.ApiBuilder.get
-import io.javalin.ApiBuilder.put
+import io.javalin.ApiBuilder.*
 
 fun main(args: Array<String>) {
 
@@ -13,12 +12,14 @@ fun main(args: Array<String>) {
             .start()
 
     app.routes {
-        get("/todos") { ctx ->
-            ctx.json(todos)
-        }
-        put("/todos") { ctx ->
-            todos = ctx.bodyAsClass(Array<Todo>::class.java)
-            ctx.status(204)
+        path("todos") {
+            get { ctx ->
+                ctx.json(todos)
+            }
+            put { ctx ->
+                todos = ctx.bodyAsClass(Array<Todo>::class.java)
+                ctx.status(204)
+            }
         }
     }
 
