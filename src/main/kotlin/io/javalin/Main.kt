@@ -6,10 +6,10 @@ fun main(args: Array<String>) {
 
     var todos = arrayOf(Todo(123123123, "My very first todo", false))
 
-    val app = Javalin.create()
-            .port(getHerokuAssignedPort())
-            .enableStaticFiles("/public")
-            .start()
+    val app = Javalin.create().apply {
+        port(getHerokuAssignedPort())
+        enableStaticFiles("/public")
+    }.start()
 
     app.routes {
         path("todos") {
