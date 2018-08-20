@@ -1,6 +1,8 @@
 package io.javalin
 
-import io.javalin.ApiBuilder.*
+import io.javalin.apibuilder.ApiBuilder.*
+
+data class Todo(val id: Long, val title: String, val completed: Boolean)
 
 fun main(args: Array<String>) {
 
@@ -17,7 +19,7 @@ fun main(args: Array<String>) {
                 ctx.json(todos)
             }
             put { ctx ->
-                todos = ctx.bodyAsClass(Array<Todo>::class.java)
+                todos = ctx.body<Array<Todo>>()
                 ctx.status(204)
             }
         }
