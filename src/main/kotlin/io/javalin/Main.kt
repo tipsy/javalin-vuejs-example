@@ -27,10 +27,4 @@ fun main(args: Array<String>) {
 
 }
 
-private fun getHerokuAssignedPort(): Int {
-    val processBuilder = ProcessBuilder()
-    if (processBuilder.environment().get("PORT") != null) {
-        return Integer.parseInt(processBuilder.environment().get("PORT"))
-    }
-    return 7000
-}
+private fun getHerokuAssignedPort() = ProcessBuilder().environment()["PORT"]?.toInt() ?: 7000
