@@ -1,15 +1,16 @@
 package io.javalin
 
 import io.javalin.apibuilder.ApiBuilder.*
+import io.javalin.http.staticfiles.Location
 
 data class Todo(val id: Long, val title: String, val completed: Boolean)
 
-fun main(args: Array<String>) {
+fun main() {
 
     var todos = arrayOf(Todo(123123123, "My very first todo", false))
 
     val app = Javalin.create {
-        it.addStaticFiles("/public")
+        it.addStaticFiles("/public", Location.CLASSPATH)
     }.start(getHerokuAssignedPort())
 
     app.routes {
@@ -18,7 +19,7 @@ fun main(args: Array<String>) {
                 ctx.json(todos)
             }
             put { ctx ->
-                todos = ctx.body<Array<Todo>>()
+                todos = ctx.bodyAsClass()
                 ctx.status(204)
             }
         }
